@@ -5,6 +5,7 @@ let videoElement;
 let gestureCanvas;
 let ctx;
 let videoStream;
+let deviceDiscovery;
 
 async function initialize() {
     videoElement = document.getElementById('videoElement');
@@ -15,6 +16,23 @@ async function initialize() {
     await gestureDetector.initialize();
 
     fileTransfer = new FileTransfer();
+
+    deviceDiscovery = new DeviceDiscovery();
+    await deviceDiscovery.startBroadcast();
+
+    updateStatus('Select a device to begin transfer');
+}
+
+function updateStatus(message) {
+    document.getElementById('status').textContent = message;
+}
+
+function showLoading(show) {
+    document.getElementById('loading').classList.toggle('active', show);
+}
+
+function updateProgress(percent) {
+    document.getElementById('progress').textContent = `${Math.round(percent)}%`;
 }
 
 async function setMode(newMode) {

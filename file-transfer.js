@@ -52,7 +52,13 @@ class FileTransfer {
     }
 
     async sendFiles(files) {
+        showLoading(true);
+        updateProgress(0);
+
         for (const file of files) {
+            const totalChunks = Math.ceil(file.size / this.chunkSize);
+            let sentChunks = 0;
+
             this.dataChannel.send(
                 JSON.stringify({
                     type: 'start',
@@ -77,7 +83,14 @@ class FileTransfer {
             }
 
             this.dataChannel.send(JSON.stringify({ type: 'end', filename: file.name }));
+
+            sentChunks++;
+            const progress = (sentChunks / totalChunks) * 100;
+            updateProgress(progress);
         }
+
+        showLoading(false);
+        updateStatus('Files sent successfully!');
     }
 
     downloadFile(url, filename) {
