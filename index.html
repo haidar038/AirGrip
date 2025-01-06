@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gesture Transfer</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/handpose"></script>
+    <style>
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #videoElement {
+            width: 640px;
+            height: 480px;
+            border: 1px solid black;
+        }
+        .controls {
+            margin: 20px;
+        }
+        #status {
+            margin: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Gesture Transfer</h1>
+        <div class="controls">
+            <button onclick="setMode('sender')">Be Sender</button>
+            <button onclick="setMode('receiver')">Be Receiver</button>
+            <input type="file" id="fileInput" multiple style="display: none">
+        </div>
+        <video id="videoElement" autoplay playsinline></video>
+        <canvas id="gestureCanvas"></canvas>
+        <div id="status">Select mode to begin</div>
+    </div>
+    <script src="gesture-detection.js"></script>
+    <script src="file-transfer.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
