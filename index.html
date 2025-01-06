@@ -2,147 +2,24 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gesture Transfer</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/handpose"></script>
-    <style>
-        :root {
-            --primary: #2563eb;
-            --success: #22c55e;
-        }
-
-        body {
-            font-family: system-ui, -apple-system, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background: #f8fafc;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .video-container {
-            position: relative;
-            margin-bottom: 2rem;
-        }
-
-        #videoElement {
-            width: 100%;
-            border-radius: 12px;
-            background: #000;
-        }
-
-        #gestureCanvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-
-        .controls {
-            display: grid;
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .device-list {
-            display: grid;
-            gap: 0.5rem;
-            padding: 1rem;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-        }
-
-        .device-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.75rem;
-            border: 1px solid #e2e8f0;
-            border-radius: 6px;
-            cursor: pointer;
-        }
-
-        .device-item:hover {
-            background: #f1f5f9;
-        }
-
-        .device-item.selected {
-            border-color: var(--primary);
-            background: #eff6ff;
-        }
-
-        .status {
-            padding: 1rem;
-            margin-bottom: 1rem;
-            border-radius: 8px;
-            background: white;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-        }
-
-        .loading {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.5);
-            align-items: center;
-            justify-content: center;
-            color: white;
-        }
-
-        .loading.active {
-            display: flex;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gesture File Transfer</title>
 </head>
 
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>Gesture Transfer</h1>
-        </div>
-
-        <div class="status" id="status">
-            Initializing...
-        </div>
-
-        <div class="device-list" id="deviceList">
-            <h2>Nearby Devices</h2>
-        </div>
-
-        <div class="video-container">
-            <video id="videoElement" autoplay playsinline></video>
-            <canvas id="gestureCanvas"></canvas>
-        </div>
-
-        <input type="file" id="fileInput" multiple style="display: none">
-    </div>
-
-    <div class="loading" id="loading">
-        <div class="loading-content">
-            <h2>Transferring Files...</h2>
-            <div id="progress">0%</div>
-        </div>
-    </div>
-
-    <script src="device-discovery.js"></script>
-    <script src="gesture-detection.js"></script>
-    <script src="file-transfer.js"></script>
-    <script src="main.js"></script>
+  <div id="root"></div>
+  <script>
+    window.global = window;
+    window.process = {
+      env: { NODE_DEBUG: false },
+      browser: true,
+      version: '16.0.0',
+      nextTick: function (callback) { setTimeout(callback, 0); }
+    };
+  </script>
+  <script type="module" src="/src/main.tsx"></script>
 </body>
 
 </html>
