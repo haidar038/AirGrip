@@ -6,6 +6,7 @@ class DeviceDiscovery {
 
     async startBroadcast() {
         this.ws = new WebSocket(`wss://${window.location.hostname}/api/websocket`);
+        console.log(`Attempting WebSocket connection to: wss://${window.location.hostname}/api/websocket`);
 
         this.ws.onmessage = (event) => {
             const message = JSON.parse(event.data);
@@ -30,3 +31,5 @@ class DeviceDiscovery {
         );
     }
 }
+
+console.log(`Attempting WebSocket connection to: wss://${window.location.hostname}/api/websocket`);
